@@ -1,8 +1,10 @@
 import java.io.*;
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.sql.*;
 
+@WebServlet(name = "Register", urlPatterns = "/register")
 public class Register extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -22,7 +24,7 @@ public class Register extends HttpServlet {
 
             //creating connection with the database
             Connection con = DriverManager.getConnection
-                    ("jdbc:mysql://localhost:3306/test","root","mazafaka");
+                    ("jdbc:mysql://localhost:3306/test","op","OpPass123");
 
             int i;
             try (PreparedStatement ps = con.prepareStatement
@@ -37,7 +39,8 @@ public class Register extends HttpServlet {
             }
 
             if(i > 0) {
-                out.println("You are sucessfully registered");
+                out.println("You are successfully registered. Please login to start quest"
+                + "<a href=\"dblogin\">Login</a>");
             }
 
         }
